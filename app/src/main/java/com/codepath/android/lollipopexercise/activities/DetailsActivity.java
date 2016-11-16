@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.view.MenuItem;
@@ -65,14 +67,16 @@ public class DetailsActivity extends AppCompatActivity {
         }
     };
 
-    public static Intent getIntent(Context context, Contact contact) {
-        Intent intent = new Intent(context, DetailsActivity.class);
-        intent.putExtra(EXTRA_CONTACT, contact);
-        return intent;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finishAfterTransition();
+                finish();
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

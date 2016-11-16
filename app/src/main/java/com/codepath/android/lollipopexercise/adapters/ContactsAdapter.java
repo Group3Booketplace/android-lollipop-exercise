@@ -2,9 +2,12 @@ package com.codepath.android.lollipopexercise.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -87,11 +90,21 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.VH> {
                     if (contact != null) {
                         // Fire an intent when a contact is selected
                         // Pass contact object in the bundle and populate details activity.
-
-                        context.startActivity(DetailsActivity.getIntent(context, contact));
+                        startDetailActivity(contact, context);
                     }
                 }
             });
+        }
+
+        private void startDetailActivity(Contact contact, Context context) {
+            Intent intent = new Intent(context, DetailsActivity.class);
+            intent.putExtra(DetailsActivity.EXTRA_CONTACT, contact);
+            Pair<View, String> pair1 = Pair.create((View) ivProfile, context.getString(R.string.title_activity_details));
+            Pair<View, String> pair2 = Pair.create((View) tvName, context.getString(R.string.title_activity_details));
+            Pair<View, String> pair3 = Pair.create(vPalette, context.getString(R.string.title_activity_details));
+
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, pair1, pair2, pair3);
+            context.startActivity(intent, optionsCompat.toBundle());
         }
 
         public void bind() {
