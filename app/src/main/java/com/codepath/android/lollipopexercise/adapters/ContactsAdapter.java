@@ -28,6 +28,16 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.VH> {
         mContacts = contacts;
     }
 
+    public void addContact(Contact contact) {
+        mContacts.add(0, contact);
+        notifyDataSetChanged();
+    }
+
+    public void undoAddContact() {
+        mContacts.remove(0);
+        notifyDataSetChanged();
+    }
+
     // Inflate the view based on the viewType provided.
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
