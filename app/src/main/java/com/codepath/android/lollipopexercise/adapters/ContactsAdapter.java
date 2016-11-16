@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.android.lollipopexercise.R;
+import com.codepath.android.lollipopexercise.activities.DetailsActivity;
 import com.codepath.android.lollipopexercise.models.Contact;
 import com.squareup.picasso.Picasso;
 
@@ -66,7 +67,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.VH> {
         final TextView tvName;
         final View vPalette;
 
-        public VH(View itemView, final Context context) {
+        public VH(final View itemView, final Context context) {
             super(itemView);
             rootView = itemView;
             ivProfile = (ImageView)itemView.findViewById(R.id.ivProfile);
@@ -81,6 +82,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.VH> {
                     if (contact != null) {
                         // Fire an intent when a contact is selected
                         // Pass contact object in the bundle and populate details activity.
+
+                        context.startActivity(DetailsActivity.getIntent(context, contact));
                     }
                 }
             });

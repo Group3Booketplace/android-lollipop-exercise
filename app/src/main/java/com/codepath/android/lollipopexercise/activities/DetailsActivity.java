@@ -1,5 +1,7 @@
 package com.codepath.android.lollipopexercise.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -36,6 +38,12 @@ public class DetailsActivity extends AppCompatActivity {
         Picasso.with(DetailsActivity.this).load(mContact.getThumbnailDrawable()).fit().centerCrop().into(ivProfile);
         tvName.setText(mContact.getName());
         tvPhone.setText(mContact.getNumber());
+    }
+
+    public static Intent getIntent(Context context, Contact contact) {
+        Intent intent = new Intent(context, DetailsActivity.class);
+        intent.putExtra(EXTRA_CONTACT, contact);
+        return intent;
     }
 
     @Override
